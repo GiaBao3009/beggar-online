@@ -77,4 +77,18 @@ test.describe('3D Beggar Simulator - Emotion by Money & Interaction Tests', () =
       await expect(canvasContainer).toBeVisible();
     }
   });
+
+  test('4. VietQR code and IT salary disclaimer display', async ({ page }) => {
+    // Kiểm tra ảnh VietQR trong khung qr-frame
+    const qrImage = page.locator('.qr-frame img');
+    await expect(qrImage).toBeVisible();
+    await expect(qrImage).toHaveAttribute('src', /qr-donate/);
+
+    // Kiểm tra thông điệp đời IT lương 4 triệu
+    const disclaimer = page.locator('.payment-disclaimer');
+    await expect(disclaimer).toContainText('Đời IT lương 4 triệu');
+
+    const footerDisclaimer = page.locator('.footer-bottom');
+    await expect(footerDisclaimer).toContainText('Đời IT lương 4 triệu');
+  });
 });

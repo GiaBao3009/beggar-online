@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import Beggar, { type Mood } from "./Beggar"
 import { Icon } from "./Icons"
 import StreetProps from "./StreetProps"
+import qrDonate from "./assets/qr-donate.png"
 
 const amounts = [
   { value: 5000, label: "Gói mì cứu đói", note: "Sống qua hôm nay" },
@@ -640,16 +641,32 @@ export default function App() {
                 “5K cũng được. Ông không chê. Ông thề.”
               </p>
             </div>
+            {/* Khu vực quét mã QR & xác nhận chuyển khoản */}
             <div className="payment-area">
+              {/* Nhãn bước 2 */}
               <div className="step-label">
                 <b>2</b> GỬI ÔNG CHÚT YÊU THƯƠNG
               </div>
+
+              {/* Khung dán ảnh QR VietQR thực tế */}
               <div className="qr-frame">
+                {/* Miếng băng dính giữ khung */}
                 <span className="tape" />
-                <QRDemo />
+                {/* Ảnh mã VietQR cứu đói IT */}
+                <img
+                  src={qrDonate}
+                  alt="Mã QR VietQR chuyển khoản cứu đói IT"
+                  className="w-full block bg-white p-1 rounded-sm shadow-inner"
+                />
                 <div>QUÉT LÀ ÔNG CƯỜI</div>
               </div>
-              <p className="demo-note">QR minh họa · Không có giao dịch thật</p>
+
+              {/* Ghi chú hài hước dưới mã QR */}
+              <p className="demo-note">
+                QR VietQR chính chủ · Đời IT lương 4 triệu cứu đói khẩn cấp!
+              </p>
+
+              {/* Nút bấm tặng tiền */}
               <button
                 ref={donateRef}
                 className="primary-button donate-button"
@@ -664,10 +681,12 @@ export default function App() {
                 </span>
                 <Icon name="arrow" />
               </button>
+
+              {/* Lời nhắn nhủ hài hước về đời IT */}
               <p className="payment-disclaimer">
-                Trải nghiệm mô phỏng. Không thu tiền thật.
+                Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.
                 <br />
-                Bấm để nhận hóa đơn tấm lòng.
+                Quét mã cứu đói hoặc bấm nút nhận hóa đơn tấm lòng!
               </p>
             </div>
           </div>
@@ -834,12 +853,13 @@ export default function App() {
             LÊN ĐẦU TRANG ↑<small>Ông vẫn ngồi đó.</small>
           </a>
         </div>
+        {/* Dòng ghi chú bản quyền và thông điệp hài hước đời IT */}
         <div className="footer-bottom">
           <span>© 2025 XIN ĐI BRO · MADE WITH ĐÓI & MỘT CHÚT HTML.</span>
           <span>
-            Đây là website giải trí mô phỏng. Không nhận quyên góp thật.
+            Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.
           </span>
-          <span>VỈA HÈ KHÔNG NGỦ.</span>
+          <span>VỈA HÈ KHÔNG NGỦ. CODE KHÔNG BUG (NÓI PHÉT).</span>
         </div>
       </footer>
       {notification && (
