@@ -298,10 +298,27 @@ export default function App() {
   return (
     <div className="street">
       <header className="header">
-        <a className="brand" href="#" aria-label="Xin Đi Bro, về đầu trang">
-          XIN ĐI <span>BRO</span>
-          <i>®</i>
-          <small>ĂN XIN THỜI ĐẠI 4.0</small>
+        {/* Khu vực Brand Logo và Tiêu đề website */}
+        <a className="brand flex items-center gap-2.5" href="#" aria-label="Xin Đi Bro, về đầu trang">
+          {/* Logo biểu tượng ca thiếc vỉa hè IT */}
+          <span className="brand-logo-icon flex-shrink-0">
+            <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <rect width="64" height="64" rx="14" fill="#1b1f18" stroke="#e6c364" strokeWidth="2.5" />
+              <circle cx="32" cy="18" r="9" fill="#facc15" stroke="#ca8a04" strokeWidth="2" />
+              <text x="32" y="22" fontFamily="sans-serif" fontWeight="900" fontSize="11" textAnchor="middle" fill="#713f12">₫</text>
+              <path d="M42 34C48 34 50 44 42 46" stroke="#c2b89b" strokeWidth="4" strokeLinecap="round" />
+              <path d="M20 28H44L41 50C41 52.2 39.2 54 37 54H27C24.8 54 23 52.2 23 50L20 28Z" fill="#a8a28e" stroke="#57534e" strokeWidth="2" />
+              <ellipse cx="32" cy="28" rx="12" ry="3.5" fill="#d6cfb8" stroke="#57534e" strokeWidth="2" />
+              <text x="32" y="44" fontFamily="monospace" fontWeight="900" fontSize="9" textAnchor="middle" fill="#3a372e">IT</text>
+            </svg>
+          </span>
+          <div>
+            <div>
+              XIN ĐI <span>BRO</span>
+              <i>®</i>
+            </div>
+            <small>ĂN XIN 4.0 · ĐỜI IT LƯƠNG 4 TRIỆU</small>
+          </div>
         </a>
         <nav aria-label="Điều hướng chính">
           <a href="#goc-via-he">GÓC VỈA HÈ</a>
@@ -366,7 +383,7 @@ export default function App() {
               </button>
             </div>
             <div className="hero-footnote">
-              <span>100% lòng thành.</span> 0% hoàn tiền. Ông tiêu hết rồi.
+              <span className="text-[#ffd15c] font-bold">★ SLOGAN ĐỜI IT:</span> Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.
             </div>
           </div>
 
@@ -538,12 +555,12 @@ export default function App() {
           <span className="hero-side-note">SCROLL XUỐNG ĐI CON ↓</span>
         </section>
 
+        {/* Dải chữ chạy ngang màn hình mang Slogan Đời IT Lương 4 Triệu */}
         <div className="ticker">
           <div>
             {[0, 1, 2, 3].map((n) => (
               <span key={n}>
-                <b>TIN NÓNG</b> ÔNG GIÀ VẪN CHƯA CÓ TIỀN ĂN SÁNG. <i>✳</i> LÒNG
-                TỐT KHÔNG MẤT PHÍ. CHUYỂN KHOẢN THÌ CÓ. <i>✳</i>{" "}
+                <b>SLOGAN ĐỜI IT</b> “ĐỜI IT LƯƠNG 4 TRIỆU, TỐI VỀ ÔM LAPTOP RA VỈA HÈ XIN BÁT CƠM CHAN NƯỚC MẮT.” <i>★</i> QUÉT VIETQR CỨU ĐÓI DEV KHẨN CẤP! <i>★</i>{" "}
               </span>
             ))}
           </div>
@@ -682,12 +699,16 @@ export default function App() {
                 <Icon name="arrow" />
               </button>
 
-              {/* Lời nhắn nhủ hài hước về đời IT */}
-              <p className="payment-disclaimer">
-                Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.
-                <br />
-                Quét mã cứu đói hoặc bấm nút nhận hóa đơn tấm lòng!
-              </p>
+              {/* Khối Banner Slogan Đời IT Lương 4 Triệu - Nổi bật, sắc nét, phong cách bìa các-tông */}
+              <div className="it-slogan-card">
+                <span className="slogan-badge-tag">★ SLOGAN ĐỜI IT ★</span>
+                <p className="slogan-highlight-text">
+                  “Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.”
+                </p>
+                <p className="slogan-sub-note">
+                  Quét mã VietQR cứu đói dev ngay & luôn hoặc bấm nút nhận hóa đơn tấm lòng!
+                </p>
+              </div>
             </div>
           </div>
         </section>

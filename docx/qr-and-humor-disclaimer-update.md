@@ -31,19 +31,22 @@ tests/
 
 ## 3. Luồng hoạt động & Chi tiết thay đổi (UI & Content)
 
-### 3.1. Mã QR Chuyển khoản
-- **Trước đây:** Sử dụng component `QRDemo` vẽ các ô vuông SVG ngẫu nhiên.
-- **Hiện tại:** Sử dụng thẻ `<img>` nạp trực tiếp `src/assets/qr-donate.png` với lớp `w-full block bg-white p-1 rounded-sm shadow-inner`.
-- **Dưới khung QR:** Cập nhật nhãn ghi chú: `QR VietQR chính chủ · Đời IT lương 4 triệu cứu đói khẩn cấp!`.
+### 3.1. Thay đổi Logo & Gỡ bỏ toàn bộ "Figma Make"
+- **Favicon & Web Logo:** Thiết kế lại toàn bộ `public/favicon.svg` thành biểu tượng ca thiếc vỉa hè kim loại với đồng xu vàng đang rơi và chữ `IT` khắc nổi.
+- **Header Brand:** Bổ sung logo ca thiếc vào thanh điều hướng bên cạnh chữ `XIN ĐI BRO ® · ĂN XIN 4.0 · ĐỜI IT LƯƠNG 4 TRIỆU`.
+- **Gỡ bỏ tên Figma Make:** 
+  - Đổi `package.json` sang `"name": "beggar-online"`.
+  - Cập nhật `.figma/make/site.json` và `vite.config.ts` để fallback title là `"XIN ĐI BRO — Online Beggar Simulator"`.
+  - Loại bỏ hoàn toàn các thẻ meta và tên cũ của Figma Make App.
 
-### 3.2. Thông điệp "Đời IT Lương 4 Triệu"
-- **Tại khung Quyên góp:** 
-  > *"Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.*  
-  > *Quét mã cứu đói hoặc bấm nút nhận hóa đơn tấm lòng!"*
-- **Tại chân trang (Footer):**
-  > *"© 2025 XIN ĐI BRO · MADE WITH ĐÓI & MỘT CHÚT HTML.*  
-  > *Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.*  
-  > *VỈA HÈ KHÔNG NGỦ. CODE KHÔNG BUG (NÓI PHÉT)."*
+### 3.2. Nâng cấp Slogan "Đời IT Lương 4 Triệu" thành Tiêu điểm Nổi bật
+- **Khắc phục lỗi mờ/khó đọc:** Thay vì để một đoạn text disclaimer 8px màu nâu chìm nghỉm, ta biến câu nói thành **Card Slogan trung tâm** `.it-slogan-card` mang phong cách bìa các-tông cao cấp:
+  - Viền vàng kim nghệ thuật `border: 2px solid #dfb872` trên nền than đêm vỉa hè `#181c15`.
+  - Tag huy hiệu `★ SLOGAN ĐỜI IT ★` màu vàng đồng sắc nét.
+  - Chữ slogan `“Đời IT lương 4 triệu, tối về ôm laptop ra vỉa hè xin bát cơm chan nước mắt.”` nổi bật với font viết tay `Patrick Hand`, màu kem vàng sáng `#fff2bf` và đổ bóng chữ rõ ràng.
+- **Dải chữ chạy (Ticker):** Cập nhật dải chữ chạy liên tục ngang màn hình:
+  `SLOGAN ĐỜI IT: “ĐỜI IT LƯƠNG 4 TRIỆU, TỐI VỀ ÔM LAPTOP RA VỈA HÈ XIN BÁT CƠM CHAN NƯỚC MẮT.” ★ QUÉT VIETQR CỨU ĐÓI DEV KHẨN CẤP!`
+- **Hero Footnote:** Đưa slogan lên ngay chân trang Hero để người dùng vừa vào web là đọc được ngay.
 
 ---
 

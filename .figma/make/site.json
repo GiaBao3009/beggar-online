@@ -1,7 +1,11 @@
 {
-  "description": "Explore a humorous online beggar simulator where visitors interact with a street character, choose playful donation amounts, and receive a funny thank-you receipt.",
+  "title": "XIN ĐI BRO — Online Beggar Simulator",
+  "description": "XIN ĐI BRO — Online Beggar Simulator. Đời IT lương 4 triệu, một góc vỉa hè, một chiếc ca, và vô vàn tấm lòng cứu đói.",
   "robots": {
-    "index": false
+    "index": true
+  },
+  "icons": {
+    "icon": "/favicon.svg"
   },
   "accessibility": {
     "addBypassLinks": false,

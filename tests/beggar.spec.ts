@@ -78,16 +78,26 @@ test.describe('3D Beggar Simulator - Emotion by Money & Interaction Tests', () =
     }
   });
 
-  test('4. VietQR code and IT salary disclaimer display', async ({ page }) => {
+  test('4. VietQR code and IT salary slogan & logo display', async ({ page }) => {
+    // Kiểm tra logo thương hiệu ca thiếc trong header
+    const brandLogo = page.locator('.brand-logo-icon');
+    await expect(brandLogo).toBeVisible();
+
     // Kiểm tra ảnh VietQR trong khung qr-frame
     const qrImage = page.locator('.qr-frame img');
     await expect(qrImage).toBeVisible();
     await expect(qrImage).toHaveAttribute('src', /qr-donate/);
 
-    // Kiểm tra thông điệp đời IT lương 4 triệu
-    const disclaimer = page.locator('.payment-disclaimer');
-    await expect(disclaimer).toContainText('Đời IT lương 4 triệu');
+    // Kiểm tra banner Slogan Đời IT lương 4 triệu nổi bật
+    const sloganCard = page.locator('.it-slogan-card');
+    await expect(sloganCard).toBeVisible();
+    await expect(sloganCard).toContainText('Đời IT lương 4 triệu');
 
+    // Kiểm tra slogan trong dải chữ chạy (ticker)
+    const ticker = page.locator('.ticker');
+    await expect(ticker).toContainText('ĐỜI IT LƯƠNG 4 TRIỆU');
+
+    // Kiểm tra thông điệp đời IT ở chân trang (footer)
     const footerDisclaimer = page.locator('.footer-bottom');
     await expect(footerDisclaimer).toContainText('Đời IT lương 4 triệu');
   });
