@@ -56,6 +56,13 @@ src/
 
 ## 4. Xử lý Kỹ thuật tương thích Đa Nền tảng (Cross-platform Asset Resolution)
 
+- **Vấn đề Git LFS Pointer (Lỗi "Ông đang nghỉ chân... Không tải được nhân vật"):**
+  - **Nguyên nhân:** File `.gitattributes` ban đầu áp dụng rule `filter=lfs` lên mọi file `*.jpg`, `*.glb`, `*.ttf`. Khi commit và push lên GitHub, Git chỉ lưu file pointer dạng text ~130 bytes thay vì file binary thật. Do đó khi GitHub Actions build hoặc Vercel pull, các file texture và font bị lỗi `invalid sfntVersion` hoặc không nạp được ảnh vào WebGL Three.js.
+  - **Cách khắc phục triệt để:**
+    1. Đã loại bỏ các filter LFS đối với các tài nguyên web tĩnh (ảnh texture, font, model 3D) trong `.gitattributes`.
+    2. Chạy `git add --renormalize .` để chuyển toàn bộ các file binary từ pointer LFS về dạng git blob chuẩn trực tiếp trong repository.
+    3. Thêm cấu hình `lfs: true` vào `actions/checkout@v4` trong `.github/workflows/deploy.yml` để đảm bảo 100% CI/CD luôn có file đầy đủ.
+
 - **Vấn đề Base Path:**
   - Trên Vercel, website nằm tại domain gốc (`/`).
   - Trên GitHub Pages, website nằm tại subpath (`/beggar-online/`).
