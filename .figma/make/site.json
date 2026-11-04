@@ -1,0 +1,10 @@
+{
+  "description": "Explore a humorous online beggar simulator where visitors interact with a street character, choose playful donation amounts, and receive a funny thank-you receipt.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
