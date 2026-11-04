@@ -101,4 +101,25 @@ test.describe('3D Beggar Simulator - Emotion by Money & Interaction Tests', () =
     const footerDisclaimer = page.locator('.footer-bottom');
     await expect(footerDisclaimer).toContainText('Đời IT lương 4 triệu');
   });
+
+  test('5. Mobile responsive layout: no toolbar & speech bubble overlap', async ({ page }) => {
+    // Đặt kích thước viewport điện thoại 375x667
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.waitForTimeout(500);
+
+    const toolbar = page.locator('.hero-emotion-toolbar').first();
+    const bubble = page.locator('.speech-bubble').first();
+    await expect(toolbar).toBeVisible();
+    await expect(bubble).toBeVisible();
+
+    const tBox = await toolbar.boundingBox();
+    const bBox = await bubble.boundingBox();
+    expect(tBox).not.toBeNull();
+    expect(bBox).not.toBeNull();
+
+    if (tBox && bBox) {
+      // Đảm bảo đáy toolbar nằm trên đỉnh của bong bóng thoại (không đè lên nhau)
+      expect(tBox.y + tBox.height).toBeLessThanOrEqual(bBox.y + 2);
+    }
+  });
 });

@@ -334,47 +334,66 @@ export async function createBeggar() {
     }
   }
 
-  // 1. Natural Receding Hairstyle (wisps along sides, temples, back of head curving downward)
-  for (let i = 0; i < 240; i++) {
+  // 1. Natural Distinguished Elderly Hairstyle (Wisps along sides, crown, temples, and nape)
+  // Crown and top hair
+  for (let i = 0; i < 110; i++) {
     const side = (i % 2 === 0 ? 1 : -1)
-    const t = (i / 240)
-    // Temple to back of head
-    const angle = 0.25 + t * 2.6
-    const rHead = 0.17 + Math.sin(t * Math.PI) * 0.025
-    const x0 = Math.sin(angle) * rHead * side
-    const z0 = Math.cos(angle) * rHead - 0.05
-    const y0 = 0.12 + Math.cos(t * Math.PI) * 0.18
-
-    // Hair flows naturally backward and down with gravity
-    const length = 0.06 + random() * 0.09
+    const x0 = side * (0.01 + random() * 0.13)
+    const y0 = 0.49 + Math.sin(random() * Math.PI) * 0.08
+    const z0 = 0.12 - random() * 0.25
+    const len = 0.05 + random() * 0.06
     const curl = (random() - 0.5) * 0.02
     addStrand(
       [
         [x0, y0, z0],
-        [x0 + side * 0.015, y0 - length * 0.25, z0 - length * 0.35 + curl],
-        [x0 + side * 0.02 + curl, y0 - length * 0.65, z0 - length * 0.7],
-        [x0 + side * 0.012, y0 - length, z0 - length * 0.9],
+        [x0 + side * 0.012, y0 + 0.008, z0 - len * 0.3 + curl],
+        [x0 + side * 0.018 + curl, y0 - len * 0.25, z0 - len * 0.65],
+        [x0 + side * 0.014, y0 - len * 0.55, z0 - len * 0.9],
       ],
-      0.0022 + random() * 0.001,
-      0.65 + random() * 0.32,
+      0.0022 + random() * 0.0008,
+      0.78 + random() * 0.2,
     )
   }
 
-  // Soft wisps at top crown
-  for (let i = 0; i < 60; i++) {
+  // Temples, sideburns, and flowing locks down past ears
+  for (let i = 0; i < 180; i++) {
     const side = (i % 2 === 0 ? 1 : -1)
-    const x0 = side * (0.01 + random() * 0.08)
-    const y0 = 0.36 + random() * 0.06
-    const z0 = 0.02 - random() * 0.12
-    const len = 0.05 + random() * 0.05
+    const t = i / 180
+    const angle = 0.4 + t * 2.3
+    const rHead = 0.19 + Math.sin(t * Math.PI) * 0.03
+    const x0 = Math.sin(angle) * rHead * side
+    const z0 = Math.cos(angle) * rHead - 0.02
+    const y0 = 0.24 + Math.cos(t * Math.PI) * 0.18
+
+    const length = 0.06 + random() * 0.08
+    const curl = (random() - 0.5) * 0.018
     addStrand(
       [
         [x0, y0, z0],
-        [x0 + side * 0.015, y0 + 0.015, z0 - len * 0.4],
-        [x0 + side * 0.022, y0 - len * 0.3, z0 - len * 0.8],
+        [x0 + side * 0.012, y0 - length * 0.25, z0 - length * 0.25 + curl],
+        [x0 + side * 0.018 + curl, y0 - length * 0.6, z0 - length * 0.5],
+        [x0 + side * 0.01, y0 - length * 0.95, z0 - length * 0.75],
       ],
-      0.0018,
+      0.0024 + random() * 0.001,
       0.72 + random() * 0.25,
+    )
+  }
+
+  // Back of head & nape flowing into collar
+  for (let i = 0; i < 90; i++) {
+    const x0 = (random() - 0.5) * 0.26
+    const y0 = 0.20 + random() * 0.24
+    const z0 = -0.15 - random() * 0.08
+    const len = 0.07 + random() * 0.07
+    addStrand(
+      [
+        [x0, y0, z0],
+        [x0 + (random() - 0.5) * 0.01, y0 - len * 0.35, z0 - 0.01],
+        [x0 + (random() - 0.5) * 0.015, y0 - len * 0.7, z0 - 0.015],
+        [x0 + (random() - 0.5) * 0.02, y0 - len, z0 - 0.02],
+      ],
+      0.0022 + random() * 0.0008,
+      0.70 + random() * 0.25,
     )
   }
 
@@ -446,11 +465,23 @@ export async function createBeggar() {
   )
   strandHair.name = "ElderlyHairStrands"
 
-  // Base hair cap for solid volume beneath wisps
-  const hairCapGeom = new THREE.SphereGeometry(0.24, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.6)
-  hairCapGeom.scale(0.95, 1.05, 1.1)
+  // Base hair cap for solid volume beneath wisps (covering crown and back of head)
+  const hairCapGeom = new THREE.SphereGeometry(0.228, 32, 24, 0, Math.PI * 2, 0, Math.PI * 0.58)
+  hairCapGeom.scale(0.97, 1.05, 1.1)
+
+  // Populate vertex color buffer so it matches m.hair PhysicalMaterial
+  const capPos = hairCapGeom.getAttribute("position")
+  const capColors: number[] = []
+  for (let i = 0; i < capPos.count; i++) {
+    const yVal = capPos.getY(i)
+    const gray = 0.82 + Math.min(0.14, Math.max(0, yVal * 0.3))
+    capColors.push(gray * 0.96, gray, gray * 0.94)
+  }
+  hairCapGeom.setAttribute("color", new THREE.Float32BufferAttribute(capColors, 3))
+
   const hairCap = new THREE.Mesh(hairCapGeom, m.hair)
-  hairCap.position.set(0, 0.14, -0.06)
+  hairCap.position.set(0, 0.38, -0.04)
+  hairCap.rotation.x = -0.1
   head.add(hairCap)
 
   // --- Natural Seated Body & Weathered Peasant Coat ---

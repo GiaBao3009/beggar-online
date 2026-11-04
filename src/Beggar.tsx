@@ -270,6 +270,17 @@ export default function Beggar({ mood, onInteract }: BeggarProps) {
       const { width, height } = container.getBoundingClientRect()
       renderer.setSize(width, height)
       camera.aspect = width / height
+      // Tự động tối ưu góc nhìn camera 3D cho màn hình điện thoại di động
+      if (width < 600) {
+        camera.fov = 40
+        camera.position.set(0, 3.2, 10.6)
+      } else if (width < 960) {
+        camera.fov = 37
+        camera.position.set(0, 3.3, 10.1)
+      } else {
+        camera.fov = 35
+        camera.position.set(0, 3.3, 9.7)
+      }
       camera.updateProjectionMatrix()
       dirty = true
     }
